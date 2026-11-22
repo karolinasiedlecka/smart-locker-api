@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SmartLocker.Api/SmartLocker.Api.csproj" />
+    <Project Path="src/SmartLocker.Application/SmartLocker.Application.csproj" />
+    <Project Path="src/SmartLocker.Domain/SmartLocker.Domain.csproj" />
+    <Project Path="src/SmartLocker.Infrastructure/SmartLocker.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SmartLocker.Tests/SmartLocker.Tests.csproj" />
+  </Folder>
+</Solution>

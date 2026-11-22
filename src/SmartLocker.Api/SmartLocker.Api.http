@@ -1,0 +1,40 @@
+@SmartLocker.Api_HostAddress = https://localhost:7028
+
+### 1. Sprawdzenie automatu WAW-01 i wolnych skrytek
+GET {{SmartLocker.Api_HostAddress}}/api/lockers/WAW-01
+Accept: application/json
+
+### 2. Rejestracja nowej przesy³ki (po wykonaniu kliknij Send request i skopiuj zwrócone "trackingNumber")
+POST {{SmartLocker.Api_HostAddress}}/api/parcels
+Content-Type: application/json
+
+{
+  "recipientPhone": "+48500111222",
+  "requiredSize": 1
+}
+
+### 3. Umieszczenie przesy³ki w automacie (podmieñ TRACKING_NUMBER na œwie¿y numer z kroku 2)
+POST {{SmartLocker.Api_HostAddress}}/api/parcels/SLK-116426560/deposit
+Content-Type: application/json
+
+{
+  "lockerCode": "WAW-01"
+}
+
+### 4. Odbiór przesy³ki (podmieñ TRACKING_NUMBER oraz PICKUP_CODE na dane z kroku 3)
+POST {{SmartLocker.Api_HostAddress}}/api/parcels/pickup
+Content-Type: application/json
+
+{
+  "trackingNumber": "SLK-116426560",
+  "lockerCode": "WAW-01",
+  "pickupCode": "252601"
+}
+
+### 5. Podgl¹d pe³nego stanu przesy³ki i historii zdarzeñ
+GET {{SmartLocker.Api_HostAddress}}/api/parcels/TRACKING_NUMBER
+Accept: application/json
+
+### 6. Sprawdzenie, czy skrytka wróci³a do statusu wolnej
+GET {{SmartLocker.Api_HostAddress}}/api/lockers/WAW-01
+Accept: application/json
